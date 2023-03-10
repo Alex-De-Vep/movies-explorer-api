@@ -24,14 +24,6 @@ router.post('/signin', celebrate({
 
 router.use(auth);
 
-// router.post('/logout', celebrate({
-//     body: Joi.object().keys({
-//         email: Joi.string().required().email(),
-//         password: Joi.string().required(),
-//     }),
-//
-// }), logout);
-
 router.use('/', routerUser);
 router.use('/', routerMovie);
 

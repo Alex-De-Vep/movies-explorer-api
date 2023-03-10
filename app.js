@@ -13,11 +13,10 @@ const router = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
-const { dbhost = 'mongodb://localhost:27017/' } = process.env;
 
 const app = express();
 
-mongoose.connect(`${dbhost}bitfilmsdb`);
+mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
 
 const options = {
   origin: [
