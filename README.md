@@ -1,7 +1,11 @@
 # movies-explorer-api
 
 Проект Diplom фронтенд + бэкенд
-Ссылка на репозиторий: https://github.com/Alex-De-Vep/movies-explorer-api
+Ссылка на репозиторий:
+https://github.com/Alex-De-Vep/movies-explorer-api
+
+Домен, по которому можно обратиться к вашему серверу
+https://api.films.suite.nomoredomains.work/
 
 Директории
 /routes — папка с файлами роутера
