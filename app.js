@@ -22,9 +22,8 @@ mongoose.connect(`${dbhost}bitfilmsdb`);
 const options = {
   origin: [
     'http://localhost:3000',
-    'https://api.super.students.nomoredomains.club',
-    'https://super.nomoredomains.club',
-    'https://alex-de-vep.github.io',
+    'https://films.suite.nomoredomains.work',
+    'https://api.films.suite.nomoredomains.work',
   ],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   preflightContinue: false,
