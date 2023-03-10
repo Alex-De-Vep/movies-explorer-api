@@ -56,6 +56,10 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
+const logout = (req, res) => {
+    res.clearCookie("jwt").send('cookie cleared');
+}
+
 const getUser = (req, res, next) => {
   User.findById(req.user._id)
     .orFail()
@@ -85,7 +89,7 @@ const updateUser = (req, res, next) => {
     .then((data) => res.send(data))
     .catch((err) => {
       if (err.codeName === 'DuplicateKey') {
-        next(new BadRequestError('Данные не могут быть использованы'));
+        next(new ConflictError('Этот email не может быть использован'));
         return;
       }
 
@@ -106,6 +110,7 @@ const updateUser = (req, res, next) => {
 module.exports = {
   createUser,
   login,
+  logout,
   getUser,
   updateUser,
 };

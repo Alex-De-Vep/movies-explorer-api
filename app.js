@@ -12,11 +12,11 @@ const handleCentralError = require('./utils/errors');
 const router = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
+const { NODE_ENV, DB_HOST, PORT = 3000 } = process.env;
 
 const app = express();
 
-mongoose.connect('mongodb://127.0.0.1:27017/bitfilmsdb');
+mongoose.connect(NODE_ENV === 'production' ? DB_HOST : 'mongodb://127.0.0.1:27017/bitfilmsdb');
 
 const options = {
   origin: [
@@ -47,7 +47,9 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(router, limiter);
+app.use(limiter);
+
+app.use(router);
 
 app.use(errorLogger);
 
