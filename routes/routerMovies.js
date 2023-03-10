@@ -7,7 +7,8 @@ routerMovie.get('/movies', getMovies);
 
 routerMovie.post('/movies', celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
     description: Joi.string().required(),
     country: Joi.string().required(),
     director: Joi.string().required(),
@@ -16,14 +17,13 @@ routerMovie.post('/movies', celebrate({
     trailerLink: Joi.string().required().regex(regexp),
     duration: Joi.number().required(),
     year: Joi.string().required(),
-    nameRU: Joi.string().required(),
-    nameEN: Joi.string().required(),
+    movieId: Joi.number().required(),
   }),
 }), createMovie);
 
-routerMovie.delete('/movies/:movieId', celebrate({
+routerMovie.delete('/movies/:cardId', celebrate({
   params: Joi.object().keys({
-    movieId: Joi.string().required().hex().length(24),
+    cardId: Joi.string().required().hex().length(24),
   }),
 }), deleteMovie);
 

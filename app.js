@@ -5,16 +5,19 @@ const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const cors = require('cors');
 require('dotenv').config();
+const helmet = require('helmet');
+const limiter = require('./utils/rateLimite');
 
 const handleCentralError = require('./utils/errors');
-const router = require('./routes/routes');
+const router = require('./routes');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
+const { dbhost = 'mongodb://localhost:27018/' } = process.env;
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
+mongoose.connect(`${dbhost}bitfilmsdb`);
 
 const options = {
   origin: [
@@ -30,6 +33,8 @@ const options = {
   credentials: true,
 };
 
+app.use(helmet());
+app.disable('x-powered-by');
 app.use('*', cors(options));
 
 app.use(bodyParser.json());
@@ -44,7 +49,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(router);
+app.use(router, limiter);
 
 app.use(errorLogger);
 

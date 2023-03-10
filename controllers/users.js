@@ -84,6 +84,11 @@ const updateUser = (req, res, next) => {
     .orFail()
     .then((data) => res.send(data))
     .catch((err) => {
+      if (err.codeName === 'DuplicateKey') {
+        next(new BadRequestError('Данные не могут быть использованы'));
+        return;
+      }
+
       if (err.name === 'DocumentNotFoundError') {
         next(new NotFoundError('Запрашиваемый пользователь не найден'));
         return;

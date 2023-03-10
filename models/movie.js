@@ -2,10 +2,12 @@ const mongoose = require('mongoose');
 const { regexp } = require('../utils/utils');
 
 const movieSchema = new mongoose.Schema({
-  name: {
+  nameRU: {
     type: String,
-    minlength: 2,
-    maxlength: 30,
+    required: true,
+  },
+  nameEN: {
+    type: String,
     required: true,
   },
   description: {
@@ -63,17 +65,9 @@ const movieSchema = new mongoose.Schema({
     ref: 'user',
     required: true,
   },
-  nameRU: {
-    type: String,
+  movieId: {
+    type: Number,
     required: true,
-  },
-  nameEN: {
-    type: String,
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
   },
 });
 
